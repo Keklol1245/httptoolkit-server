@@ -12,6 +12,7 @@ export const ALLOWED_ORIGINS = IS_PROD_BUILD
         // ensures that no other sites/apps can communicate with your server
         // whilst you have the app open. If they could (requires an HTTP mitm),
         // they would be able to start proxies & interceptors.
+        /^https:\/\/Keklol1245\.github\.io$/,
         /^https:\/\/app\.httptoolkit\.tech$/
     ]
     : [
@@ -23,6 +24,7 @@ export const ALLOWED_ORIGINS = IS_PROD_BUILD
         /^https?:\/\/127.0.0.\d+(:\d+)?$/,
         /^http:\/\/local\.httptoolkit\.tech(:\d+)?$/,
         /^https:\/\/app\.httptoolkit\.tech$/,
+        /^https:\/\/Keklo1245\.github\.io$/,
     ];
 
 export const MOCKTTP_ALLOWED_ORIGINS = [
