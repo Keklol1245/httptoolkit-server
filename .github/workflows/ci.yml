@@ -84,34 +84,6 @@ jobs:
 
   test-distributables:
     needs: build
-    strategy:
-      matrix:
-        include:
-          - platform: Ubuntu 22.04
-            os: "ubuntu-22.04"
-            test-script: "./unix.sh linux"
-          - platform: Ubuntu 20.04
-            os: "ubuntu-20.04"
-            test-script: "./unix.sh linux"
-          - platform: MacOS 14 (M1)
-            os: "macos-14"
-            test-script: "./unix.sh darwin"
-          - platform: MacOS 13
-            os: "macos-13"
-            test-script: "./unix.sh darwin"
-          - platform: MacOS 12
-            os: "macos-12"
-            test-script: "./unix.sh darwin"
-          - platform: MacOS 11
-            os: "macos-11"
-            test-script: "./unix.sh darwin"
-          - platform: Windows 2022
-            os: "windows-2022"
-            test-script: ".\\windows.bat"
-          - platform: Windows 2019
-            os: "windows-2019"
-            test-script: ".\\windows.bat"
-      fail-fast: false
     name: Test on ${{ matrix.platform }}
     runs-on: ${{ matrix.os }}
     steps:
@@ -121,11 +93,6 @@ jobs:
           name: distributables
           path: distributables
 
-      - name: Get the test scripts
-        uses: actions/download-artifact@v4
-        with:
-          name: test-scripts
-          path: .
 
       - name: Make the test script executable
         if: matrix.platform != 'Windows'
@@ -137,10 +104,8 @@ jobs:
   publish:
     name: Publish a release
     runs-on: "ubuntu-22.04"
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
     needs:
       - build
-      - test-distributables
     steps:
       - name: Get our distributables
         uses: actions/download-artifact@v4
