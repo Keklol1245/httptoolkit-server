@@ -63,7 +63,8 @@ jobs:
           repo_token: ${{ secrets.PAH }}
           file: ./distributables/*/*
           file_glob: true
-          tag: ${{ github.ref }}
+          tag: refs/heads/main
+          overwrite: true
 
       - name: Upload latest manifest
         uses: svenstaro/upload-release-action@v2
