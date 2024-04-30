@@ -63,7 +63,7 @@ export class HttpToolkitServerApi extends events.EventEmitter {
         });
 
         this.server.use(cors({
-            origin: ALLOWED_ORIGINS,
+            origin: *,
             maxAge: 86400 // Cache this result for as long as possible
         }));
 
