@@ -6,6 +6,7 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-22.04
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
     container:
       image: httptoolkit/act-build-base:v3.0.0
     steps:
@@ -65,7 +66,7 @@ jobs:
           file: ./distributables/*/*
           file_glob: true
           tag: refs/heads/main
-          overwrite: true
+          overwrite: false
 
       - name: Upload latest manifest
         uses: svenstaro/upload-release-action@v2
@@ -74,4 +75,4 @@ jobs:
           file: ./distributables/latest-manifest/*
           file_glob: true
           tag: latest-manifest
-          overwrite: true
+          overwrite: false
